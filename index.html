@@ -10,73 +10,34 @@
     <script type="text/javascript">
   
         var data = {
-                      
-            /* Requerido (string). Email de la cuenta PagoPlux del Establecimiento o Id del elemento html que posee el valor */
-        
             PayboxRemail: "ssaavedra@fastline.com.ec",
-        
-            /* Requerido (Encriptado base64- string). Cuando se lista las tarjetas.
-         * No necesario: cuando se registra una tarjeta. */
-        
             PayboxIdSuscription: "MGEzZjExMGQtZDZhMS00NDMxLWFh",
-        
-            /* Requerido(string). Número de teléfono del cliente, requerido al registrar la tarjeta. 
-        *No necesario. Al listar las tarjetas. */
-        
             PayBoxClientPhone: "593990121123",
-        
-            /* Requerido (string). Define el tipo de recurso a cargar, con los siguientes valores: 
-        0: Para registrar la tarjeta
-        1: Para Listar las tarjetas
-        */
-        
             PayboxListCard: "0",
-        
-            /* Requerido (string). Nombre del establecimiento en PagoPlux, se muestra en la pantalla del botón de pagos*/
-        
             PayboxRename: "Fastline S.A",
-        
-            /* Requerido (string). Nombre del cliente que registra la tarjeta
-           No necesario. Cuando se lista las tarjetas*/
-        
-            PayboxSendname: "Oscar España",
-        
-        
-            /* Requerido (string). Mail del cliente de la tarjeta
-           No necesario. Cuando se lista las tarjetas del cliente 
-        */
-        
+            PayboxSendname: "Oscar España",  
             PayboxSendmail: "espaaoscar@gmail.com",
-        
-                
-            /* Requerido (string). Dirección del cliente
-           No necesario. Cuando se lista las tarjetas del cliente */
-        
             PayboxDirection: "Ibarra - Ecuador",
-        
-        
-        /* Requerido (boolean) Tipo de Ejecución
-         * Production: true (Modo Producción, Se realizarán consultas y registros en ambiente de producción, además afectará a la tdc para los pagos de prueba al registrar la tarjeta).
-         * Production: false (Modo Prueba, se realizarán cobros de prueba y no  
-           se guardará ni afectará al sistema de producción.)
-        */
             PayboxProduction: false,
-        
-        /* Requerido (string): Cuando se registra la tarjeta. Id o nombre del plan asociado para el registro de tarjetas.
-         * No necesario: Cuando se lista la tarjeta.
-        */
-        
             PayboxIdPlan: "75",
-        
-        /* Requerido (string): Identificación del cliente. 
-         * No necesario: Cuando se lista la tarjeta. */
-        
             PayBoxClientIdentification: "1003757307", 
-        
-           /* Requerido (string)* Entorno de ejecución del registro y listado de tarjetas: prod, sandbox */
             PayboxEnvironment: "sandbox"
         };
         
+    </script>
+    <script type="text/javascript">
+        var onAuthorize = function (response) {
+            // La variable response posee un Objeto con la respuesta de PagoPlux.
+            if (response.status == 'succeeded') {					
+                alert('Proceso completado con éxito');
+                console.log(response);
+            } else {
+                // Si hubo un problema con el pago se ejecutará este código.
+                alert('Error al procesar el pago');
+                console.log(response);
+                console.log(JSON.parse(response));
+            }
+        };
     </script>
 
 </head>
